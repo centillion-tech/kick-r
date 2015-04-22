@@ -1,1 +1,1 @@
-# kick-r - Boot and shutdown R instance on AWS
+# kick-r - Boot/shutdown R instance on AWS

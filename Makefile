@@ -2,8 +2,8 @@ all: setup
 	$(MAKE) -C terraform
 
 setup:
+	bundle install
 	$(MAKE) -C packer
-	$(MAKE) -C terraform setup
 
 clean:
 	$(MAKE) -C terraform clean

@@ -11,7 +11,7 @@ login: all
 clean:
 	$(MAKE) -C terraform clean
 
-distclean:
+distclean: clean
 	$(MAKE) -C packer clean
 
 .PHONY: all setup login clean distclean

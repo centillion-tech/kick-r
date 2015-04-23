@@ -3,6 +3,7 @@ all: setup
 
 setup:
 	$(MAKE) -C packer
+	$(MAKE) -C terraform setup
 
 clean:
 	$(MAKE) -C terraform clean

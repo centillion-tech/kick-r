@@ -1,2 +1,4 @@
 *.stamp
 *.tmp
+terraform.tfstate
+terraform.tfstate.backup

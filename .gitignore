@@ -1,3 +1,4 @@
+/terraform/kick-r.pem
 *.stamp
 *.tmp
 terraform.tfstate

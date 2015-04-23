@@ -1,19 +1,20 @@
 AMI_STAMP := ../packer/ami.stamp
+ADDRESS_STAMP := address.stamp
 PEM := kick-r.pem
 KEYNAME := kick-r
 TERRAFORM_OPT := -var 'key_path=${PEM}' -var 'key_name=${KEYNAME}' -var aws_ami=`cat ${AMI_STAMP}`
 
-all: apply address.stamp
+all: apply ${ADDRESS_STAMP}
 
-address.stamp:
+${ADDRESS_STAMP}:
 	terraform show | grep public_dns | awk '{ print $$3 }' > $@
 
 clean: destroy
-	rm -f ${PEM}
+	rm -f ${PEM} ${ADDRESS_STAMP}
 	bundle exec ruby delete_key_pair.rb ${KEYNAME}
 
 login: all
-	ssh -i ${PEM} ubuntu@`cat address.stamp`
+	ssh -i ${PEM} ubuntu@`cat ${ADDRESS_STAMP}`
 
 show:
 	terraform $@

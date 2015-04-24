@@ -4,9 +4,10 @@ PEM := kick-r.pem
 KEYNAME := kick-r
 TERRAFORM_OPT := -var 'key_path=${PEM}' -var 'key_name=${KEYNAME}' -var aws_ami=`cat ${AMI_STAMP}`
 
-all: apply ${ADDRESS_STAMP}
+all: ${ADDRESS_STAMP}
 
 ${ADDRESS_STAMP}:
+	$(MAKE) apply
 	terraform show | grep public_ip | head -1 | awk '{ print $$3 }' > $@.tmp
 	mv $@.tmp $@
 

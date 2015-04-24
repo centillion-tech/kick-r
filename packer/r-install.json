@@ -19,6 +19,7 @@
       "sleep 30",
       "sudo apt-get update",
       "sudo apt-get install -y r-base r-base-dev",
+      "sudo adduser ubuntu staff",
       "R --version"
     ]
   }]

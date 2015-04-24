@@ -9,16 +9,15 @@
 Install packages that are needed by Kick-R.
 
 ```
-$ sudo apt-get install xxx
+$ sudo apt-get install git make bundler unzip
 ```
 
 Install [Packer](https://www.packer.io/) and [Terraform](https://terraform.io/).
 
 ```
-$ cd ~/bin
-$ unzip -x packer_0.7.5_linux_amd64.zip
-$ unzip -x terraform_0.4.2_linux_amd64.zip
-$ export PATH=$HOME/bin:$PATH
+$ cd /usr/local/bin
+$ sudo unzip -x packer_0.7.5_linux_amd64.zip
+$ sudo unzip -x terraform_0.4.2_linux_amd64.zip
 ```
 
 Set up environment value for AWS KEY.
@@ -38,12 +37,19 @@ T.B.D.
 
 ## How to use
 
+Run command "make login" to boot and login R instance on AWS.
+
 ```
 $ git clone https://github.com/centillion-tech/kick-r.git
 $ cd kick-r
 $ make login
 ubuntu@ip-10-189-135-202:~$ R --version | head -1
 R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
+```
+
+Run command "make distclean" to shutdown the R instance.
+
+```
 $ make distclean
 ```
 

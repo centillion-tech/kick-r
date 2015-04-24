@@ -9,7 +9,7 @@
     "secret_key": "{{user `aws_secret_key`}}",
     "region": "ap-northeast-1",
     "source_ami": "ami-936d9d93",
-    "instance_type": "m3.2xlarge",
+    "instance_type": "m3.large",
     "ssh_username": "ubuntu",
     "ami_name": "r-instance {{timestamp}}"
   }],

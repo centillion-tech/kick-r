@@ -7,7 +7,8 @@ TERRAFORM_OPT := -var 'key_path=${PEM}' -var 'key_name=${KEYNAME}' -var aws_ami=
 all: apply ${ADDRESS_STAMP}
 
 ${ADDRESS_STAMP}:
-	terraform show | grep public_dns | awk '{ print $$3 }' > $@
+	terraform show | grep public_ip | head -1 | awk '{ print $$3 }' > $@.tmp
+	mv $@.tmp $@
 
 clean: destroy
 	rm -f ${PEM} ${ADDRESS_STAMP}

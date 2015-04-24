@@ -3,8 +3,41 @@ provider "aws" {
     region = "${var.aws_region}"
 }
 
-# Our default security group to access
-# the instances over SSH and HTTP
+resource "aws_vpc" "default" {
+    cidr_block = "10.0.0.0/16"
+}
+
+resource "aws_internet_gateway" "default" {
+    vpc_id = "${aws_vpc.default.id}"
+}
+
+# Public subnets
+
+resource "aws_subnet" "public" {
+    vpc_id = "${aws_vpc.default.id}"
+
+    cidr_block = "10.0.0.0/24"
+    availability_zone = "${var.aws_region}b"
+}
+
+# Routing table for public subnets
+
+resource "aws_route_table" "public" {
+	vpc_id = "${aws_vpc.default.id}"
+
+	route {
+		cidr_block = "0.0.0.0/0"
+		gateway_id = "${aws_internet_gateway.default.id}"
+	}
+}
+
+resource "aws_route_table_association" "public" {
+	subnet_id = "${aws_subnet.public.id}"
+	route_table_id = "${aws_route_table.public.id}"
+}
+
+# R-instance
+
 resource "aws_security_group" "default" {
     name = "terraform_r_instance"
     description = "Used in the terraform"
@@ -24,8 +57,9 @@ resource "aws_security_group" "default" {
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
-}
 
+    vpc_id = "${aws_vpc.default.id}"
+}
 
 resource "aws_instance" "r-instance" {
   # The connection block tells our provisioner how to
@@ -38,28 +72,15 @@ resource "aws_instance" "r-instance" {
     key_file = "${var.key_path}"
   }
 
-  instance_type = "m3.2xlarge"
-
-  # Lookup the correct AMI based on the region
-  # we specified
   ami = "${var.aws_ami}"
-
-  # The name of our SSH keypair you've created and downloaded
-  # from the AWS console.
-  #
-  # https://console.aws.amazon.com/ec2/v2/home?region=us-west-2#KeyPairs:
-  #
+  availability_zone = "${var.aws_region}b"
+  instance_type = "m3.2xlarge"
   key_name = "${var.key_name}"
+  security_groups = ["${aws_security_group.default.id}"]
+  subnet_id = "${aws_subnet.public.id}"
+}
 
-  # Our Security group to allow HTTP and SSH access
-  security_groups = ["${aws_security_group.default.name}"]
-
-  # We run a remote provisioner on the instance after creating it.
-  # In this case, we just install nginx and start it. By default,
-  # this should be on port 80
-  provisioner "remote-exec" {
-    inline = [
-        "R --version"
-    ]
-  }
+resource "aws_eip" "r-instance" {
+	instance = "${aws_instance.r-instance.id}"
+	vpc = true
 }

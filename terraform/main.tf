@@ -23,17 +23,17 @@ resource "aws_subnet" "public" {
 # Routing table for public subnets
 
 resource "aws_route_table" "public" {
-	vpc_id = "${aws_vpc.default.id}"
+    vpc_id = "${aws_vpc.default.id}"
 
-	route {
-		cidr_block = "0.0.0.0/0"
-		gateway_id = "${aws_internet_gateway.default.id}"
-	}
+    route {
+        cidr_block = "0.0.0.0/0"
+        gateway_id = "${aws_internet_gateway.default.id}"
+    }
 }
 
 resource "aws_route_table_association" "public" {
-	subnet_id = "${aws_subnet.public.id}"
-	route_table_id = "${aws_route_table.public.id}"
+    subnet_id = "${aws_subnet.public.id}"
+    route_table_id = "${aws_route_table.public.id}"
 }
 
 # R-instance
@@ -62,25 +62,25 @@ resource "aws_security_group" "default" {
 }
 
 resource "aws_instance" "r-instance" {
-  # The connection block tells our provisioner how to
-  # communicate with the resource (instance)
-  connection {
-    # The default username for our AMI
-    user = "ubuntu"
+    # The connection block tells our provisioner how to
+    # communicate with the resource (instance)
+    connection {
+        # The default username for our AMI
+        user = "ubuntu"
 
-    # The path to your keyfile
-    key_file = "${var.key_path}"
-  }
+        # The path to your keyfile
+        key_file = "${var.key_path}"
+    }
 
-  ami = "${var.aws_ami}"
-  availability_zone = "${var.aws_region}b"
-  instance_type = "m3.2xlarge"
-  key_name = "${var.key_name}"
-  security_groups = ["${aws_security_group.default.id}"]
-  subnet_id = "${aws_subnet.public.id}"
+    ami = "${var.aws_ami}"
+    availability_zone = "${var.aws_region}b"
+    instance_type = "m3.2xlarge"
+    key_name = "${var.key_name}"
+    security_groups = ["${aws_security_group.default.id}"]
+    subnet_id = "${aws_subnet.public.id}"
 }
 
 resource "aws_eip" "r-instance" {
-	instance = "${aws_instance.r-instance.id}"
-	vpc = true
+    instance = "${aws_instance.r-instance.id}"
+    vpc = true
 }

@@ -42,6 +42,7 @@ Run command "make login" to boot and login R instance on AWS.
 ```
 $ git clone https://github.com/centillion-tech/kick-r.git
 $ cd kick-r
+$ make
 $ make login
 ubuntu@ip-10-189-135-202:~$ R --version | head -1
 R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"

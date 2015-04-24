@@ -14,7 +14,7 @@ clean: destroy
 	bundle exec ruby delete_key_pair.rb ${KEYNAME}
 
 login: all
-	ssh -i ${PEM} ubuntu@`cat ${ADDRESS_STAMP}`
+	env LC_ALL=en_US.UTF-8 ssh -i ${PEM} ubuntu@`cat ${ADDRESS_STAMP}`
 
 show:
 	terraform $@

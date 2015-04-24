@@ -74,7 +74,7 @@ resource "aws_instance" "r-instance" {
 
     ami = "${var.aws_ami}"
     availability_zone = "${var.aws_region}b"
-    instance_type = "m3.2xlarge"
+    instance_type = "c4.8xlarge"
     key_name = "${var.key_name}"
     security_groups = ["${aws_security_group.default.id}"]
     subnet_id = "${aws_subnet.public.id}"

@@ -75,3 +75,9 @@ Shutdown the AWS instance.
 ### make distclean
 
 Remove the AMI.
+
+## License
+
+The MIT License (MIT)
+
+Copyright (c) 2015 Centillion Japan Co.,Ltd.

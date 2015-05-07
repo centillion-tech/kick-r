@@ -3,6 +3,9 @@ ADDRESS_STAMP := address.stamp
 PEM := kick-r.pem
 KEYNAME := kick-r
 TERRAFORM_OPT := -var 'key_path=${PEM}' -var 'key_name=${KEYNAME}' -var aws_ami=`cat ${AMI_STAMP}`
+SSH := env LC_ALL=en_US.UTF-8 ssh -i ${PEM} ubuntu@`cat ${ADDRESS_STAMP}`
+RSYNC := env LC_ALL=en_US.UTF-8 rsync -auzvL -e "ssh -i ${PEM}"
+R := # empty
 
 all: ${ADDRESS_STAMP}
 
@@ -16,7 +19,19 @@ clean: destroy
 	bundle exec ruby delete_key_pair.rb ${KEYNAME}
 
 login: all
-	env LC_ALL=en_US.UTF-8 ssh -i ${PEM} ubuntu@`cat ${ADDRESS_STAMP}`
+	${SSH}
+
+job: all
+ifdef R
+	test -f ${R}
+	${SSH} mkdir -p kick-r/job
+	${RSYNC} `dirname ${R}`/ ubuntu@`cat ${ADDRESS_STAMP}`:~/kick-r/job/`basename ${R}`
+	${SSH} "cd kick-r/job/`basename ${R}` && R --vanilla < `basename ${R}`"
+	${RSYNC} ubuntu@`cat ${ADDRESS_STAMP}`:~/kick-r/job/`basename ${R}`/ `dirname ${R}`/
+	${SSH} rm -rf 'kick-r/job/*'
+else
+	@echo '*** Need "R" value for location of R script.'
+endif
 
 show:
 	terraform $@

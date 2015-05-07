@@ -8,6 +8,9 @@ setup:
 login: all
 	$(MAKE) -C terraform login
 
+job: all
+	$(MAKE) -C terraform job
+
 clean:
 	$(MAKE) -C terraform clean
 

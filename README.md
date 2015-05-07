@@ -43,12 +43,15 @@ Run command "make login" to boot and login R instance on AWS.
 $ git clone https://github.com/centillion-tech/kick-r.git
 $ cd kick-r
 $ make
-$ make login
+$ make ssh-config > ~/.ssh/config
+$ ssh kick-r
 ubuntu@ip-10-189-135-202:~$ R --version | head -1
 R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
 ```
 
-Run command "make distclean" to shutdown the R instance.
+If you want to use ESS mode for remote process ([detail](http://ess.r-project.org/Manual/ess.html#ESS-processes-on-Remote-Computers)), and run R process with **M-x R** and simply type **/ssh:kick-r:**.
+
+After all, run command "make distclean" to shutdown the R instance.
 
 ```
 $ make distclean
@@ -67,6 +70,23 @@ Boot an AWS instance using the AMI. After running the command, ssh connection of
 ### make login
 
 Login the AWS instance.
+
+### make ssh-config
+
+Print config for .ssh/config.
+
+```
+$ make ssh-config > ~/.ssh/config
+$ slogin kick-r
+```
+
+### make job
+
+Run R script at the AWS instance.
+
+```
+$ make job R=~/some/where/foo.R
+```
 
 ### make clean
 

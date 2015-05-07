@@ -21,6 +21,14 @@ clean: destroy
 login: all
 	${SSH}
 
+ssh-config: all
+	@echo "Host kick-r"
+	@echo "    Hostname `cat ${ADDRESS_STAMP}`"
+	@echo "    User ubuntu"
+	@echo "    IdentityFile `realpath ${PEM}`"
+	@echo "    ForwardX11 yes"
+	@echo "    ServerAliveInterval 30"
+
 job: all
 ifdef R
 	test -f ${R}

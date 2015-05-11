@@ -58,6 +58,14 @@ resource "aws_security_group" "default" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 
+    # Cloudera Manager access from anywhere
+    ingress {
+        from_port = 7180
+        to_port = 7180
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
     vpc_id = "${aws_vpc.default.id}"
 }
 

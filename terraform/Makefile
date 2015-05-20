@@ -1,8 +1,8 @@
 AMI_STAMP := ../packer/ami.stamp
 ADDRESS_STAMP := address.stamp
 PEM := kick-r.pem
-KEYNAME := kick-r
-TERRAFORM_OPT := -var 'key_path=${PEM}' -var 'key_name=${KEYNAME}' -var aws_ami=`cat ${AMI_STAMP}`
+KEYNAME := kick-r-`id -un`
+TERRAFORM_OPT := -var key_path=${PEM} -var key_name=${KEYNAME} -var aws_ami=`cat ${AMI_STAMP}`
 SSH := env LC_ALL=en_US.UTF-8 ssh -i ${PEM} ubuntu@`cat ${ADDRESS_STAMP}`
 RSYNC := env LC_ALL=en_US.UTF-8 rsync -auzvL -e "ssh -i ${PEM}"
 R := # empty

@@ -3,7 +3,7 @@ all: setup.stamp
 
 setup: setup.stamp
 setup.stamp:
-	bundle install
+	bundle install --path vendor/bundle
 	$(MAKE) -C packer
 	touch setup.stamp
 

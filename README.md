@@ -49,7 +49,7 @@ ubuntu@ip-10-189-135-202:~$ R --version | head -1
 R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
 ```
 
-If you want to use ESS mode for remote R process ([detail](http://ess.r-project.org/Manual/ess.html#ESS-processes-on-Remote-Computers)), and run R process with **M-x R** and simply type **/ssh:kick-r:**.
+If you want to use Emacs ESS mode for remote R process ([detail](http://ess.r-project.org/Manual/ess.html#ESS-processes-on-Remote-Computers)), and run R process with **M-x R** and simply type **/ssh:kick-r:**.
 
 After all, run command "make distclean" to shutdown the R instance.
 

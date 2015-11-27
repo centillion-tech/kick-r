@@ -1,5 +1,7 @@
-/terraform/kick-r.pem
 *.stamp
 *.tmp
+/.bundle/
+/terraform/kick-r.pem
+/vendor/
 terraform.tfstate
 terraform.tfstate.backup

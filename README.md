@@ -1,4 +1,4 @@
-# Kick-R: Boot R instance on AWS
+# Kick-R: Get your own R instance with 36 cores on AWS
 
 ![Big picture](./draw/bigpicture.png)
 

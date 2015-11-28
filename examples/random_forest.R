@@ -9,7 +9,7 @@ cores <- detectCores()
 cl <- makeCluster(cores)
 registerDoParallel(cl)
 
-system.time(fit.rf <- foreach(ntree = rep(500, cores), .combine = combine,
+system.time(fit.rf <- foreach(ntree = rep(40, 36), .combine = combine,
                   .export = "spam", .packages = "randomForest") %dopar% {
   randomForest(type ~ ., data = spam, ntree = ntree)
 })

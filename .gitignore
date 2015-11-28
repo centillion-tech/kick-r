@@ -1,7 +1,9 @@
 *.stamp
 *.tmp
+.Rhistory
 /.bundle/
 /terraform/kick-r.pem
 /vendor/
+examples/batch_job/plot_result.pdf
 terraform.tfstate
 terraform.tfstate.backup

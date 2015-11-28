@@ -16,8 +16,10 @@ Install [Packer](https://www.packer.io/) and [Terraform](https://terraform.io/).
 
 ```
 $ cd /usr/local/bin
-$ sudo unzip -x packer_0.7.5_linux_amd64.zip
-$ sudo unzip -x terraform_0.4.2_linux_amd64.zip
+$ wget https://releases.hashicorp.com/packer/0.8.6/packer_0.8.6_linux_amd64.zip
+$ wget https://releases.hashicorp.com/terraform/0.6.7/terraform_0.6.7_linux_amd64.zip
+$ sudo unzip -x packer_0.8.6_linux_amd64.zip
+$ sudo unzip -x terraform_0.6.7_linux_amd64.zip
 ```
 
 Set up environment value for AWS KEY.

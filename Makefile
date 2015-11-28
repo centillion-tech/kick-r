@@ -23,4 +23,17 @@ distclean: clean
 	$(MAKE) -C packer clean
 	rm -f *.stamp
 
-.PHONY: all setup login clean distclean
+ODGS := $(wildcard draw/*.odg)
+PNGS := $(patsubst %.odg,%.png,${ODGS})
+
+figure: ${PNGS}
+
+%.png: %.odg
+	unoconv -n -f png -o unoconv_tmp $< 2> /dev/null   || \
+	  unoconv -f png -o unoconv_tmp $<                 || \
+	  unoconv -n -f png -o unoconv_tmp $< 2> /dev/null || \
+	  unoconv -f png -o unoconv_tmp $<
+	convert -resize 600x unoconv_tmp.png $@
+	rm -f unoconv_tmp.png
+
+.PHONY: all setup login clean distclean figure

@@ -1,6 +1,6 @@
 # Kick-R: Boot R instance on AWS
 
-![Big picture](./img/bigpicture.jpg)
+![Big picture](./draw/bigpicture.png)
 
 ## Setup
 

@@ -98,6 +98,10 @@ Shutdown the AWS instance.
 
 Remove the AMI.
 
+## See also
+
+* [AWSに36コア環境作ってR言語プログラミング \| その他ブログ](https://kiwamu.wordpress.com/2015/12/18/aws%e4%b8%8a%e3%81%abr%e8%a8%80%e8%aa%9e%e7%92%b0%e5%a2%83%e3%82%92%e6%a7%8b%e7%af%89%e3%81%97%e3%81%a6/)
+
 ## License
 
 The MIT License (MIT)
